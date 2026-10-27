@@ -27,17 +27,19 @@ const StatsPanel = ({ students }: StatsPanelProps) => {
   const totalStudents = students.length;
   const honourRoll = students.filter((student) => student.average >= 80).length;
   const gradeTwelve = students.filter((student) => student.grade === 12).length;
+  const studentAverages = students.reduce((sum, student) => sum + student.average, 0) / (students.length || 1);
 
   // The three stats, so the cards can be drawn with one map
   const stats = [
     { label: "Total students", value: totalStudents },
     { label: "Honour roll", value: honourRoll },
     { label: "Grade 12", value: gradeTwelve },
+    { label: "Average overall grade", value: studentAverages.toFixed(2) }
   ];
 
   return (
     // Stat cards grid: one column on a phone, three on wider screens
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
       {stats.map((stat) => (
         // One stat card
         <div
