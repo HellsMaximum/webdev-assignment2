@@ -1,14 +1,25 @@
+// SortControls.tsx
+// Author: Daniel Carpintero
+// Date: October 27, 2026
+// Displays a dropdown containing the available sorting options.
+// Receives the selected sorting option and callback through props.
+// Shows the current selection and notifies the parent when the option changes.
+// The parent component handles sorting the student list.
+
+// Sorting option type
 export type SortOption =
   | "lastName"
   | "grade"
   | "average"
   | "averageDesc";
 
+// Component props
 interface SortControlsProps {
   sortOption: SortOption;
   onSortChange: (sort: SortOption) => void;
 }
 
+// Available sorting options
 const sortOptions: { value: SortOption; label: string }[] = [
   { value: "lastName", label: "Last Name (A–Z)" },
   { value: "grade", label: "Grade (Low to High)" },
@@ -16,11 +27,11 @@ const sortOptions: { value: SortOption; label: string }[] = [
   { value: "averageDesc", label: "Average (High to Low)" },
 ];
 
+// Sorting controls component
 export default function SortControls({
   sortOption,
   onSortChange,
 }: SortControlsProps) {
-  // Display the available sorting options.
   return (
     <div className="flex flex-col gap-2">
       <label
