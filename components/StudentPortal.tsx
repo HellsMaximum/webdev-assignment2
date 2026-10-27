@@ -25,6 +25,9 @@ const StudentPortal = () => {
   const [searchText, setSearchText] = useState("");
   const [gradeFilter, setGradeFilter] = useState<GradeFilterValue>("all");
   const [sortOption, setSortOption] = useState<SortOption>("lastName");
+  const [previousStudents, setPreviousStudents] = useState<Student[] | null>(
+    null,
+  );
 
   // filter by name and grade, worked out on every render
   const filteredStudents = students.filter((student) => {
@@ -48,22 +51,38 @@ const StudentPortal = () => {
     }
   });
 
-  // remove one student by id (new array)
+  // remove one student and save the previous list for undo
   const handleRemove = (id: number) => {
+    setPreviousStudents([...students]);
     setStudents((prev) => prev.filter((student) => student.id !== id));
   };
 
-  // remove every student (new empty array)
+  // remove every student and save the previous list for undo
   const handleClearAll = () => {
+    if (students.length === 0) return;
+
+    setPreviousStudents([...students]);
     setStudents([]);
   };
 
-  // add a student with an id one higher than the highest current id (new array)
+  // restore the previous student list
+  const handleUndo = () => {
+    if (previousStudents === null) return;
+
+    setStudents([...previousStudents]);
+    setPreviousStudents(null);
+  };
+
+  // add a student with a unique id (new array)
   const handleAdd = (newStudent: Omit<Student, "id">) => {
     setStudents((prev) => {
-      const nextId =
-        prev.length === 0 ? 1 : Math.max(...prev.map((student) => student.id)) + 1;
-      return [...prev, { id: nextId, ...newStudent }];
+      const highestId = Math.max(
+        0,
+        ...initialStudents.map((student) => student.id),
+        ...prev.map((student) => student.id),
+      );
+
+      return [...prev, { id: highestId + 1, ...newStudent }];
     });
   };
 
@@ -79,19 +98,37 @@ const StudentPortal = () => {
       <section id="students" className="scroll-mt-20 space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <h2 className={`text-2xl font-bold ${palette.heading}`}>Students</h2>
-          <button
-            onClick={handleClearAll}
-            className={`px-4 py-2 rounded-lg font-semibold ${palette.primaryBg} ${palette.primaryText} ${palette.primaryHover}`}
-          >
-            Clear all
-          </button>
+
+          <div className="flex flex-wrap gap-2">
+            {previousStudents !== null && (
+              <button
+                type="button"
+                onClick={handleUndo}
+                className={`rounded-lg px-4 py-2 font-semibold ${palette.badgeBg} ${palette.badgeText}`}
+              >
+                Undo
+              </button>
+            )}
+
+            <button
+              type="button"
+              onClick={handleClearAll}
+              disabled={students.length === 0}
+              className={`rounded-lg px-4 py-2 font-semibold ${palette.primaryBg} ${palette.primaryText} ${palette.primaryHover} disabled:cursor-not-allowed disabled:opacity-50`}
+            >
+              Clear all
+            </button>
+          </div>
         </div>
 
         <SearchBox searchText={searchText} onSearchChange={setSearchText} />
 
         {/* grade buttons and sort dropdown side by side, stacking on a phone */}
         <div className="flex flex-wrap items-end justify-between gap-4">
-          <GradeFilter gradeFilter={gradeFilter} onGradeChange={setGradeFilter} />
+          <GradeFilter
+            gradeFilter={gradeFilter}
+            onGradeChange={setGradeFilter}
+          />
           <SortControls sortOption={sortOption} onSortChange={setSortOption} />
         </div>
 
@@ -100,11 +137,13 @@ const StudentPortal = () => {
 
       {/* add a student section */}
       <section id="add-student" className="scroll-mt-20 space-y-4">
-        <h2 className={`text-2xl font-bold ${palette.heading}`}>Add a student</h2>
+        <h2 className={`text-2xl font-bold ${palette.heading}`}>
+          Add a student
+        </h2>
         <AddStudent onAdd={handleAdd} />
       </section>
     </main>
   );
-}
+};
 
 export default StudentPortal;
