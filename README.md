@@ -2,17 +2,17 @@
 
 A single-page student portal built with Next.js 16, React, TypeScript and Tailwind CSS for **Assignment: Exploring Front-End Development Components**. The school administrator can see every student, search by name, see a few numbers about the school at a glance, and add or remove students.
 
-**Deployed website:**  https://webdev-assignment2-9d77ymzaw-group4-b923.vercel.app
+**Deployed website:** https://webdev-assignment2.vercel.app
 **GitHub repository:** https://github.com/HellsMaximum/webdev-assignment2
 
 ## Group members and what each one built
 
-| Member | Role | Built |
-| --- | --- | --- |
-| Doug Dickens | Member A | `app/layout.tsx`, `app/page.tsx`, `Navbar`, `Footer`, `StatsPanel`, `data/colorPalette.ts` and the overall look of the page |
-| Niko Dewit | Member B | `data/students.ts` (Student interface and starting data), `StudentList` and `StudentCard` |
-| Caelan Abugan | Member C | `StudentPortal` (state, Remove, Clear all and the search filter), `SearchBox` and `AddStudent` |
-| Daniel Carpintero | Member D | `GradeFilter` and `SortControls` (filter by grade and sort the list) |
+| Member            | Role     | Built                                                                                                                       |
+| ----------------- | -------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Doug Dickens      | Member A | `app/layout.tsx`, `app/page.tsx`, `Navbar`, `Footer`, `StatsPanel`, `data/colorPalette.ts` and the overall look of the page |
+| Niko Dewit        | Member B | `data/students.ts` (Student interface and starting data), `StudentList` and `StudentCard`                                   |
+| Caelan Abugan     | Member C | `StudentPortal` (state, Remove, Clear all and the search filter), `SearchBox` and `AddStudent`                              |
+| Daniel Carpintero | Member D | `GradeFilter` and `SortControls` (filter by grade and sort the list)                                                        |
 
 ## How the app is put together
 
