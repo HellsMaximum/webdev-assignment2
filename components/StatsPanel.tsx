@@ -33,7 +33,7 @@ const StatsPanel = ({ students }: StatsPanelProps) => {
   const stats = [
     { label: "Total students", value: totalStudents },
     { label: "Honour roll", value: honourRoll },
-    { label: "Grade 12", value: gradeTwelve },
+    { label: "Graduating", value: gradeTwelve },
     { label: "Average overall grade", value: studentAverages.toFixed(2) }
   ];
 

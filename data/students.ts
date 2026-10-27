@@ -43,4 +43,7 @@ export const students: Student[] = [
   { id: 7, firstName: "Mia", lastName: "Kowalski", grade: 9, average: 72 },
   { id: 8, firstName: "Ethan", lastName: "Nguyen", grade: 9, average: 65 },
   { id: 9, firstName: "Ava", lastName: "Campbell", grade: 12, average: 82 },
+  { id: 10, firstName: "Liam", lastName: "Ahmed", grade: 11, average: 87 },
+  { id: 11, firstName: "Sofia", lastName: "Bennett", grade: 10, average: 74 },
+  { id: 12, firstName: "Noah", lastName: "Petrov", grade: 9, average: 80 },
 ];
