@@ -26,7 +26,7 @@ const StudentPortal = () => {
   const visibleStudents = students.filter((student) =>
     `${student.firstName} ${student.lastName}`
       .toLowerCase()
-      .includes(searchText.trim().toLowerCase())
+      .includes(searchText.trim().toLowerCase()),
   );
 
   // remove one student by id (new array)
@@ -43,7 +43,9 @@ const StudentPortal = () => {
   const handleAdd = (newStudent: Omit<Student, "id">) => {
     setStudents((prev) => {
       const nextId =
-        prev.length === 0 ? 1 : Math.max(...prev.map((student) => student.id)) + 1;
+        prev.length === 0
+          ? 1
+          : Math.max(...prev.map((student) => student.id)) + 1;
       return [...prev, { id: nextId, ...newStudent }];
     });
   };
@@ -73,7 +75,9 @@ const StudentPortal = () => {
 
       {/* add a student section */}
       <section id="add-student" className="scroll-mt-20 space-y-4">
-        <h2 className={`text-2xl font-bold ${palette.heading}`}>Add a student</h2>
+        <h2 className={`text-2xl font-bold ${palette.heading}`}>
+          Add a student
+        </h2>
         <AddStudent onAdd={handleAdd} />
       </section>
     </main>
