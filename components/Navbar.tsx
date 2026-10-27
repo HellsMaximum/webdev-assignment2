@@ -4,11 +4,13 @@ const Navbar = () => {
   return (
     <header className={`${palette.headerBg} border-b ${palette.divider}`}>
       <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
-        <h1 className={`text-lg font-bold ${palette.heading}`}>Unit Converter</h1>
+        <h1 className={`text-lg font-bold ${palette.heading}`}>
+          Student Portal
+        </h1>
         <span
           className={`text-xs font-semibold ${palette.badgeText} ${palette.badgeBg} px-3 py-1 rounded-full`}
         >
-          CPRG 306 &middot; Week 4
+          CPRG 306 &middot; Assignment 2
         </span>
       </div>
     </header>
