@@ -1,0 +1,31 @@
+// Light palette: #f4eeff, #dcd6f7, #a6b1e1, #424874
+// Dark mode palette: #081f37, #1e549f, #2e79ba, #5fc9f3
+// Full class names used to make tailwind detect them.
+export const palette = {
+  card: "bg-[#dcd6f7] dark:bg-[#1e549f]",
+  title: "text-[#424874] dark:text-white",
+  subtitle: "text-[#424874]/70 dark:text-sky-200/70",
+  label: "text-[#424874] dark:text-sky-100",
+  hint: "text-[#424874]/60 dark:text-sky-200/60",
+  inputBg: "bg-[#f4eeff] dark:bg-[#081f37]",
+  inputText: "text-[#424874] dark:text-white",
+  border: "border-[#a6b1e1] dark:border-[#2e79ba]",
+  inputFocusBorder: "focus:border-[#424874] dark:focus:border-[#5fc9f3]",
+  secondaryText: "text-[#424874] dark:text-sky-100",
+  secondaryHover: "hover:bg-[#a6b1e1]/40 dark:hover:bg-[#081f37]",
+  primaryBg: "bg-[#424874] dark:bg-[#2e79ba]",
+  primaryHover: "hover:bg-[#2f3459] dark:hover:bg-[#5fc9f3] dark:hover:text-[#081f37]",
+  primaryText: "text-[#f4eeff] dark:text-white",
+  resultBg: "bg-[#f4eeff] dark:bg-[#081f37]",
+  resultLabel: "text-[#424874]/70 dark:text-sky-200/70",
+  resultValue: "text-[#424874] dark:text-[#5fc9f3]",
+  pageBg: "bg-[#f4eeff] dark:bg-[#081f37]",
+  headerBg: "bg-[#dcd6f7] dark:bg-[#1e549f]",
+  divider: "border-[#a6b1e1] dark:border-[#1e549f]",
+  badgeText: "text-[#f4eeff] dark:text-[#081f37]",
+  badgeBg: "bg-[#424874] dark:bg-[#5fc9f3]",
+  heading: "text-[#424874] dark:text-white",
+  body: "text-[#424874]/80 dark:text-sky-100/80",
+  footerText: "text-[#424874]/70 dark:text-sky-200/70",
+  footerMuted: "text-[#424874]/60 dark:text-sky-200/50",
+};
