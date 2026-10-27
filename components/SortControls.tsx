@@ -14,7 +14,6 @@ import { palette } from "@/data/colorPalette";
 // Sorting option type
 export type SortOption =
   | "lastName"
-  | "grade"
   | "average"
   | "averageDesc";
 
@@ -27,7 +26,6 @@ interface SortControlsProps {
 // Available sorting options
 const sortOptions: { value: SortOption; label: string }[] = [
   { value: "lastName", label: "Last Name (A–Z)" },
-  { value: "grade", label: "Grade (Low to High)" },
   { value: "average", label: "Average (Low to High)" },
   { value: "averageDesc", label: "Average (High to Low)" },
 ];
@@ -37,14 +35,17 @@ export default function SortControls({
   sortOption,
   onSortChange,
 }: SortControlsProps) {
+  // Track whether the sorting dropdown is open.
   const [isOpen, setIsOpen] = useState(false);
 
+  // Find the selected option, defaulting to the first option.
   const selectedOption =
     sortOptions.find((option) => option.value === sortOption) ??
     sortOptions[0];
 
   return (
     <div className="relative flex w-full max-w-sm flex-col gap-2">
+      {/* Label the sorting dropdown. */}
       <label
         id="student-sort-label"
         className={`text-sm font-medium ${palette.label}`}
@@ -52,6 +53,7 @@ export default function SortControls({
         Sort students by
       </label>
 
+      {/* Button that opens and closes the sorting options. */}
       <button
         type="button"
         aria-labelledby="student-sort-label"
@@ -59,6 +61,7 @@ export default function SortControls({
         aria-expanded={isOpen}
         onClick={() => setIsOpen((open) => !open)}
         onKeyDown={(event) => {
+          // Close the dropdown when the Escape key is pressed.
           if (event.key === "Escape") {
             setIsOpen(false);
           }
@@ -69,6 +72,7 @@ export default function SortControls({
         <span aria-hidden="true">{isOpen ? "⌃" : "⌄"}</span>
       </button>
 
+      {/* Display the available sorting options when the dropdown is open. */}
       {isOpen && (
         <ul
           role="listbox"
@@ -76,6 +80,7 @@ export default function SortControls({
           className={`absolute left-0 right-0 top-full z-20 mt-1 overflow-hidden rounded-lg border shadow-lg ${palette.inputBg} ${palette.inputText} ${palette.border}`}
         >
           {sortOptions.map((option) => {
+            // Check whether this option is currently selected.
             const isSelected = option.value === sortOption;
 
             return (
@@ -84,6 +89,7 @@ export default function SortControls({
                 role="option"
                 aria-selected={isSelected}
               >
+                {/* Select the sorting option and close the dropdown. */}
                 <button
                   type="button"
                   onClick={() => {
@@ -97,6 +103,8 @@ export default function SortControls({
                   }`}
                 >
                   {option.label}
+
+                  {/* Show a checkmark beside the selected option. */}
                   {isSelected && (
                     <span className="float-right" aria-hidden="true">
                       ✓

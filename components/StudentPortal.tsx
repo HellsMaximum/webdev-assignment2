@@ -1,11 +1,16 @@
-// StudentPortal.tsx
-// Author: Caelan Abugan
+
+ // StudentPortal.tsx
+// Authors: Caelan Abugan, Daniel Carpintero
 // Date: October 27, 2026
 // This is the main component of the portal and it's where all the student data lives.
-// It doesn't take any props, it just loads the starting students from data/students.ts and keeps the list, search text, grade filter and sort option in state.
-// When you remove a student, clear everyone, or add someone new, it builds a new array instead of changing the old one, and new students get an id nobody else has.
-// Every time it renders it filters the list by name and grade, then sorts a copy of it, so the shown list is never stored as its own state.
-// It shows the Overview, Students and Add a student sections and passes the data and the callback functions down to the other components.
+// It loads the starting students from data/students.ts and keeps the list, search text,
+// grade filter and sort option in state.
+// When a student is removed, everyone is cleared, or a new student is added, it builds
+// a new array instead of changing the old one, and new students receive unique IDs.
+// Every time it renders, it filters the list by name and grade, then sorts a copy of it.
+// It displays the Overview, Students and Add a student sections and passes data and
+// callback functions down to the other components.
+// Daniel updated the sorting options to remove grade sorting.
 
 "use client";
 
@@ -20,7 +25,7 @@ import StudentList from "@/components/StudentList";
 import AddStudent from "@/components/AddStudent";
 
 const StudentPortal = () => {
-  // state: the student list, search text, grade filter and sort option
+  // State: the student list, search text, grade filter and sort option.
   const [students, setStudents] = useState<Student[]>(initialStudents);
   const [searchText, setSearchText] = useState("");
   const [gradeFilter, setGradeFilter] = useState<GradeFilterValue>("all");
@@ -29,35 +34,40 @@ const StudentPortal = () => {
     null,
   );
 
-  // filter by name and grade, worked out on every render
+  // Filter students by name and grade on every render.
   const filteredStudents = students.filter((student) => {
     const fullName = `${student.firstName} ${student.lastName}`.toLowerCase();
     const matchesSearch = fullName.includes(searchText.trim().toLowerCase());
-    const matchesGrade = gradeFilter === "all" || student.grade === gradeFilter;
+    const matchesGrade =
+      gradeFilter === "all" || student.grade === gradeFilter;
+
     return matchesSearch && matchesGrade;
   });
 
-  // sort a copy of the filtered list, never the state array
+  // Sort a copy of the filtered list without changing the state array.
   const visibleStudents = [...filteredStudents].sort((a, b) => {
     switch (sortOption) {
+      // Sort alphabetically by last name.
       case "lastName":
         return a.lastName.localeCompare(b.lastName);
-      case "grade":
-        return a.grade - b.grade;
+
+      // Sort from the lowest average to the highest.
       case "average":
         return a.average - b.average;
+
+      // Sort from the highest average to the lowest.
       case "averageDesc":
         return b.average - a.average;
     }
   });
 
-  // remove one student and save the previous list for undo
+  // Remove one student and save the previous list for Undo.
   const handleRemove = (id: number) => {
     setPreviousStudents([...students]);
     setStudents((prev) => prev.filter((student) => student.id !== id));
   };
 
-  // remove every student and save the previous list for undo
+  // Remove every student and save the previous list for Undo.
   const handleClearAll = () => {
     if (students.length === 0) return;
 
@@ -65,7 +75,7 @@ const StudentPortal = () => {
     setStudents([]);
   };
 
-  // restore the previous student list
+  // Restore the previous student list.
   const handleUndo = () => {
     if (previousStudents === null) return;
 
@@ -73,7 +83,7 @@ const StudentPortal = () => {
     setPreviousStudents(null);
   };
 
-  // add a student with a unique id (new array)
+  // Add a student with a unique ID.
   const handleAdd = (newStudent: Omit<Student, "id">) => {
     setStudents((prev) => {
       const highestId = Math.max(
@@ -88,18 +98,23 @@ const StudentPortal = () => {
 
   return (
     <main className="max-w-5xl mx-auto px-6 py-8 space-y-12">
-      {/* overview section, stats always use the full list */}
+      {/* Overview section: statistics use the full student list. */}
       <section id="overview" className="scroll-mt-20 space-y-4">
-        <h2 className={`text-2xl font-bold ${palette.heading}`}>Overview</h2>
+        <h2 className={`text-2xl font-bold ${palette.heading}`}>
+          Overview
+        </h2>
         <StatsPanel students={students} />
       </section>
 
-      {/* students section */}
+      {/* Students section. */}
       <section id="students" className="scroll-mt-20 space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-4">
-          <h2 className={`text-2xl font-bold ${palette.heading}`}>Students</h2>
+          <h2 className={`text-2xl font-bold ${palette.heading}`}>
+            Students
+          </h2>
 
           <div className="flex flex-wrap gap-2">
+            {/* Show Undo when a previous list is available. */}
             {previousStudents !== null && (
               <button
                 type="button"
@@ -110,6 +125,7 @@ const StudentPortal = () => {
               </button>
             )}
 
+            {/* Clear the complete student list. */}
             <button
               type="button"
               onClick={handleClearAll}
@@ -121,21 +137,33 @@ const StudentPortal = () => {
           </div>
         </div>
 
-        <SearchBox searchText={searchText} onSearchChange={setSearchText} />
+        {/* Search students by name. */}
+        <SearchBox
+          searchText={searchText}
+          onSearchChange={setSearchText}
+        />
 
-        {/* grade buttons and sort dropdown side by side, stacking on a phone */}
+        {/* Grade filter and sort dropdown stay side by side. */}
         <div className="flex flex-wrap items-end justify-between gap-4">
           <GradeFilter
             gradeFilter={gradeFilter}
             onGradeChange={setGradeFilter}
           />
-          <SortControls sortOption={sortOption} onSortChange={setSortOption} />
+
+          <SortControls
+            sortOption={sortOption}
+            onSortChange={setSortOption}
+          />
         </div>
 
-        <StudentList students={visibleStudents} onRemove={handleRemove} />
+        {/* Display the filtered and sorted students. */}
+        <StudentList
+          students={visibleStudents}
+          onRemove={handleRemove}
+        />
       </section>
 
-      {/* add a student section */}
+      {/* Add a student section remains below the student list. */}
       <section id="add-student" className="scroll-mt-20 space-y-4">
         <h2 className={`text-2xl font-bold ${palette.heading}`}>
           Add a student
