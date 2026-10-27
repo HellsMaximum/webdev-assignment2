@@ -1,10 +1,15 @@
+"use client";
+
 // GradeFilter.tsx
 // Author: Daniel Carpintero
 // Date: October 27, 2026
-// Displays buttons for filtering students by grade.
-// Receives the selected grade and callback through props.
-// Highlights the selected grade and notifies the parent when a button is clicked.
-// The parent component handles filtering the student list.
+// This component displays buttons for filtering students by grade.
+// It receives the selected grade and a callback through props.
+// It uses the shared color palette for light and dark mode styling.
+// When a button is clicked, it notifies the parent of the selected grade.
+
+// Imports
+import { palette } from "@/data/colorPalette";
 
 // Grade filter type
 export type GradeFilterValue = "all" | 9 | 10 | 11 | 12;
@@ -25,20 +30,25 @@ export default function GradeFilter({
 }: GradeFilterProps) {
   return (
     <div className="flex flex-wrap gap-2">
-      {grades.map((grade) => (
-        <button
-          key={grade}
-          type="button"
-          onClick={() => onGradeChange(grade)}
-          className={`rounded-lg px-4 py-2 font-medium transition-colors ${
-            grade === gradeFilter
-              ? "bg-blue-600 text-white"
-              : "bg-gray-200 text-gray-800 hover:bg-gray-300"
-          }`}
-        >
-          {grade === "all" ? "All" : grade}
-        </button>
-      ))}
+      {grades.map((grade) => {
+        const isSelected = grade === gradeFilter;
+
+        return (
+          <button
+            key={grade}
+            type="button"
+            onClick={() => onGradeChange(grade)}
+            aria-pressed={isSelected}
+            className={`rounded-lg border px-4 py-2 font-medium transition-colors ${
+              isSelected
+                ? `${palette.primaryBg} ${palette.primaryText} ${palette.primaryHover}`
+                : `${palette.card} ${palette.heading} ${palette.border} hover:opacity-80`
+            }`}
+          >
+            {grade === "all" ? "All" : grade}
+          </button>
+        );
+      })}
     </div>
   );
 }
