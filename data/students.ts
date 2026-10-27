@@ -1,3 +1,15 @@
+/*
+ * File: students.ts
+ * Author: Niko Dewit
+ * Date: October 27, 2026
+ * Description: This file defines the Student interface and the starting
+ * list of students for the portal. It takes no inputs (props); the data is
+ * written directly in the file. There is no processing, the file only
+ * declares one interface and one array. Its output is the exported
+ * Student type and the exported students array, which StudentPortal
+ * imports as its starting state.
+ */
+
 type Grade = 9 | 10 | 11 | 12;
 
 export interface Student {

@@ -7,11 +7,13 @@
  * whether the array is empty; if so it outputs a message, otherwise it
  * uses map() to draw one StudentCard per student, keyed by id. The output
  * is either the no-students message or a responsive grid of cards that
- * is one column on phones and more columns on wider screens.
+ * is one column on phones and more columns on wider screens. Colours come
+ * from the shared palette file.
  */
 
 import { Student } from "@/data/students";
 import StudentCard from "@/components/StudentCard";
+import { palette } from "@/data/colorPalette";
 
 // ===== Props =====
 interface StudentListProps {
@@ -23,7 +25,9 @@ const StudentList = ({ students, onRemove }: StudentListProps) => {
   // ===== Empty case: show a message instead of cards =====
   if (students.length === 0) {
     return (
-      <p className="rounded-lg bg-gray-100 p-6 text-center text-gray-600">
+      <p
+        className={`rounded-lg border p-6 text-center ${palette.resultBg} ${palette.border} ${palette.hint}`}
+      >
         No students to show.
       </p>
     );
