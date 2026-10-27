@@ -29,7 +29,7 @@ const StatsPanel = ({ students }: StatsPanelProps) => {
   const gradeTwelve = students.filter((student) => student.grade === 12).length;
   const studentAverages = students.reduce((sum, student) => sum + student.average, 0) / (students.length || 1);
 
-  // The three stats, so the cards can be drawn with one map
+  // The four stats, so the cards can be drawn with one map
   const stats = [
     { label: "Total students", value: totalStudents },
     { label: "Honour roll", value: honourRoll },

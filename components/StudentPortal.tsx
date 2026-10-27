@@ -1,5 +1,4 @@
-
- // StudentPortal.tsx
+// StudentPortal.tsx
 // Authors: Caelan Abugan, Daniel Carpintero
 // Date: October 27, 2026
 // This is the main component of the portal and it's where all the student data lives.
@@ -38,8 +37,7 @@ const StudentPortal = () => {
   const filteredStudents = students.filter((student) => {
     const fullName = `${student.firstName} ${student.lastName}`.toLowerCase();
     const matchesSearch = fullName.includes(searchText.trim().toLowerCase());
-    const matchesGrade =
-      gradeFilter === "all" || student.grade === gradeFilter;
+    const matchesGrade = gradeFilter === "all" || student.grade === gradeFilter;
 
     return matchesSearch && matchesGrade;
   });
@@ -100,18 +98,14 @@ const StudentPortal = () => {
     <main className="max-w-5xl mx-auto px-6 py-8 space-y-12">
       {/* Overview section: statistics use the full student list. */}
       <section id="overview" className="scroll-mt-28 space-y-4">
-        <h2 className={`text-2xl font-bold ${palette.heading}`}>
-          Overview
-        </h2>
+        <h2 className={`text-2xl font-bold ${palette.heading}`}>Overview</h2>
         <StatsPanel students={students} />
       </section>
 
       {/* Students section. */}
       <section id="students" className="scroll-mt-28 space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-4">
-          <h2 className={`text-2xl font-bold ${palette.heading}`}>
-            Students
-          </h2>
+          <h2 className={`text-2xl font-bold ${palette.heading}`}>Students</h2>
 
           <div className="flex flex-wrap gap-2">
             {/* Show Undo when a previous list is available. */}
@@ -138,10 +132,7 @@ const StudentPortal = () => {
         </div>
 
         {/* Search students by name. */}
-        <SearchBox
-          searchText={searchText}
-          onSearchChange={setSearchText}
-        />
+        <SearchBox searchText={searchText} onSearchChange={setSearchText} />
 
         {/* Grade filter and sort dropdown stay side by side. */}
         <div className="flex flex-wrap items-end justify-between gap-4">
@@ -150,17 +141,11 @@ const StudentPortal = () => {
             onGradeChange={setGradeFilter}
           />
 
-          <SortControls
-            sortOption={sortOption}
-            onSortChange={setSortOption}
-          />
+          <SortControls sortOption={sortOption} onSortChange={setSortOption} />
         </div>
 
         {/* Display the filtered and sorted students. */}
-        <StudentList
-          students={visibleStudents}
-          onRemove={handleRemove}
-        />
+        <StudentList students={visibleStudents} onRemove={handleRemove} />
       </section>
 
       {/* Add a student section remains below the student list. */}
