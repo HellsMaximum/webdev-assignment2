@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 // ---------- Root layout component ----------
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       {/* Body: shared page background from the palette, fills the full screen height */}
       <body className={`${palette.pageBg} min-h-screen`}>
         {/* Header shown on every page */}

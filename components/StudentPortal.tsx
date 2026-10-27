@@ -99,7 +99,7 @@ const StudentPortal = () => {
   return (
     <main className="max-w-5xl mx-auto px-6 py-8 space-y-12">
       {/* Overview section: statistics use the full student list. */}
-      <section id="overview" className="scroll-mt-20 space-y-4">
+      <section id="overview" className="scroll-mt-28 space-y-4">
         <h2 className={`text-2xl font-bold ${palette.heading}`}>
           Overview
         </h2>
@@ -107,7 +107,7 @@ const StudentPortal = () => {
       </section>
 
       {/* Students section. */}
-      <section id="students" className="scroll-mt-20 space-y-4">
+      <section id="students" className="scroll-mt-28 space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <h2 className={`text-2xl font-bold ${palette.heading}`}>
             Students
@@ -164,7 +164,7 @@ const StudentPortal = () => {
       </section>
 
       {/* Add a student section remains below the student list. */}
-      <section id="add-student" className="scroll-mt-20 space-y-4">
+      <section id="add-student" className="scroll-mt-28 space-y-4">
         <h2 className={`text-2xl font-bold ${palette.heading}`}>
           Add a student
         </h2>

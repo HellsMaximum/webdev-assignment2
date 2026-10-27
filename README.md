@@ -1,5 +1,5 @@
 
-# New Generation High School – Student Portal
+# High School – Student Portal
 
 A single-page student portal built with Next.js 16, React, TypeScript and Tailwind CSS for **Assignment: Exploring Front-End Development Components**. The school administrator can view students, search by name, filter and sort the student list, view student details, add or remove students, and see statistics about the school.
 
