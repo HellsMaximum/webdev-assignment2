@@ -2,7 +2,7 @@
 
 A single-page student portal built with Next.js 16, React, TypeScript and Tailwind CSS for **Assignment: Exploring Front-End Development Components**. The school administrator can see every student, search by name, see a few numbers about the school at a glance, and add or remove students.
 
-**Deployed website:** _add Vercel link here_
+**Deployed website:**  https://webdev-assignment2-9d77ymzaw-group4-b923.vercel.app
 **GitHub repository:** https://github.com/HellsMaximum/webdev-assignment2
 
 ## Group members and what each one built
