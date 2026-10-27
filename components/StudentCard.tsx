@@ -2,7 +2,7 @@
 
 /*
  * File: StudentCard.tsx
- * Author: [Your Name]
+ * Author: Niko Dewit
  * Date: October 27, 2026
  * Description: This component shows one student as a card. It receives
  * the student object and an onRemove callback as props. It keeps one piece
